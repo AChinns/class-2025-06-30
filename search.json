@@ -4,7 +4,7 @@
     "href": "index.html",
     "title": "Massachusetts Income",
     "section": "",
-    "text": "Get some more data"
+    "text": "library(tidycensus)\nlibrary(tidyverse)\nlibrary(sf)\n\ncensus_api_key(\"f75eb76377f5f57e17f4d63e4912b48282db59c9\", overwrite = TRUE)\n\nma_income &lt;- get_acs(\n  geography = \"tract\",\n  variables = \"B19013_001\",  # Median household income\n  state = \"MA\",\n  year = 2022,\n  geometry = TRUE,\n  progress = FALSE           # suppress progress bar\n)\n\n\n# Now plot the data\nggplot(ma_income) +\n  geom_sf(aes(fill = estimate), color = NA) +\n  scale_fill_viridis_c(option = \"plasma\", name = \"Median Income ($)\") +\n  labs(\n    title = \"Massachusetts Median Household Income by Census Tract\",\n    caption = \"Source: ACS 5-Year Estimates (2022)\"\n  ) +\n  theme_void()"
   },
   {
     "objectID": "about.html",
